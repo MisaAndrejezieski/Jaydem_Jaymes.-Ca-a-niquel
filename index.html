@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Define a compatibilidade com o Internet Explorer -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Define a viewport para responsividade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para o arquivo CSS externo -->
+    <link rel="stylesheet" href="index.css">
+    <!-- Título da página -->
+    <title>Caça-níquel</title>
+</head>
+<body>
+    <!-- Contêiner principal -->
+    <div class="container">
+        <!-- Conteúdo do contêiner -->
+        <div class="containerContents">
+            <!-- Título do jogo -->
+            <div class="title">
+                <h2>Jayden James</h2>
+            </div>
+
+            <!-- Área de resultados -->
+            <label for="msg" id="results">Rode</label>
+
+            <!-- Área das imagens dos slots -->
+            <div class="images">
+                <img class="slots slot-1" src="./images/j001.jpg" />
+                <img class="slots slot-2" src="./images/j002.jpg" />
+                <img class="slots slot-3" src="./images/j003.jpg" />
+                <img class="slots slot-4" src="./images/j004.jpg" />
+                <img class="slots slot-5" src="./images/j005.jpg" />
+                <img class="slots slot-6" src="./images/j006.jpg" />
+                <img class="slots slot-7" src="./images/j007.jpg" />
+                <img class="slots slot-8" src="./images/j008.jpg" />
+                <img class="slots slot-9" src="./images/j009.jpg" />
+            </div>
+
+            <!-- Área de créditos -->
+            <div class="credits">
+                <label for="creditos">Créditos: </label>
+                <input type="number" id="creditos" value="1000" readonly>
+            </div>
+
+            <!-- Área de aposta -->
+            <div class="bet">
+                <label for="aposta">Aposta: </label>
+                <input type="number" id="aposta" value="10">
+            </div>
+
+            <!-- Área de ganhos -->
+            <div class="winnings">
+                <label for="ganhos">Ganhos: </label>
+                <input type="number" id="ganhos" value="0" readonly>
+            </div>
+
+            <!-- Botão para jogar -->
+            <button type="button" id="botao" onclick="multiplicador();">Jogar</button>
+        </div>
+    </div>
+    <!-- Link para o arquivo JavaScript externo -->
+    <script src="index.js"></script>
+</body>
+</html>

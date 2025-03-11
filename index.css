@@ -1,0 +1,139 @@
+/* Define o estilo básico para o HTML e o corpo da página */
+html, body {
+    margin: 0; /* Remove as margens padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    height: 100%; /* Define a altura como 100% da tela */
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif; /* Define a fonte padrão */
+}
+
+/* Estilo para o contêiner principal */
+.container {
+    width: 100%; /* Define a largura como 100% */
+    height: 120vh; /* Define a altura como 120% da altura da visualização */
+    background: url('./images/cassino.png') no-repeat fixed center; /* Define a imagem de fundo */
+    background-size: cover; /* Ajusta a imagem de fundo para cobrir todo o contêiner */
+    display: flex; /* Usa flexbox para alinhar os itens */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+}
+
+/* Estilo para o conteúdo do contêiner */
+.containerContents {
+    background: url('./images/cassino.png') no-repeat fixed center; /* Define a imagem de fundo */
+    width: 300px; /* Define a largura */
+    padding: 20px; /* Define o preenchimento interno */
+    border-radius: 10px; /* Define bordas arredondadas */
+    display: flex; /* Usa flexbox para alinhar os itens */
+    flex-direction: column; /* Alinha os itens em coluna */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra ao redor do contêiner */
+}
+
+/* Estilo para o título */
+.title {
+    padding: 10px; /* Define o preenchimento interno */
+    color: #f5f5f5; /* Define a cor do texto */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo para a área das imagens */
+.images {
+    display: grid; /* Usa grid layout para alinhar os itens */
+    grid-template-columns: repeat(3, 1fr); /* Define 3 colunas de igual largura */
+    gap: 10px; /* Define o espaçamento entre os itens */
+    margin: 20px 0; /* Define a margem superior e inferior */
+    width: 100%; /* Define a largura como 100% */
+}
+
+/* Estilo para os slots */
+.slots {
+    width: 100px; /* Define a largura */
+    height: 100px; /* Define a altura */
+    object-fit: cover; /* Ajusta a imagem para cobrir o slot */
+}
+
+/* Estilo para os botões */
+button {
+    margin: 10px; /* Define a margem */
+    padding: 10px 20px; /* Define o preenchimento interno */
+    background: rgb(red, green, blue); /* Define a cor de fundo */
+    outline: none; /* Remove o contorno padrão */
+    color: black; /* Define a cor do texto */
+    border: solid 1px red; /* Define a borda */
+    border-radius: 5px; /* Define bordas arredondadas */
+    cursor: pointer; /* Define o cursor como ponteiro */
+    transition: all 0.3s ease; /* Adiciona uma transição suave */
+}
+
+/* Estilo para os botões ao passar o mouse */
+button:hover {
+    color: white; /* Define a cor do texto */
+    border: solid 1px white; /* Define a cor da borda */
+    background-color: black; /* Define a cor de fundo */
+}
+
+/* Estilo para a área de resultados */
+#results {
+    margin: 10px; /* Define a margem */
+    padding: 10px; /* Define o preenchimento interno */
+    color: #fff; /* Define a cor do texto */
+    background: #7f8c8d; /* Define a cor de fundo */
+    border-radius: 5px; /* Define bordas arredondadas */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo para a área de resultados quando o jogador ganha */
+#results.won {
+    background: #27ae60; /* Define a cor de fundo */
+}
+
+/* Estilo para a área de resultados quando o jogador perde */
+#results.lost {
+    background: #c0392b; /* Define a cor de fundo */
+}
+
+/* Estilo para as áreas de créditos, aposta e ganhos */
+.credits, .bet, .winnings {
+    margin: 10px 0; /* Define a margem superior e inferior */
+    display: flex; /* Usa flexbox para alinhar os itens */
+    justify-content: space-between; /* Distribui os itens com espaço entre eles */
+    width: 100%; /* Define a largura como 100% */
+}
+
+/* Estilo para os inputs de créditos, aposta e ganhos */
+.credits input, .bet input, .winnings input {
+    width: 50%; /* Define a largura como 50% */
+    padding: 5px; /* Define o preenchimento interno */
+    text-align: right; /* Alinha o texto à direita */
+}
+
+/* Estilo para telas menores que 768px */
+@media screen and (max-width: 767.98px) {
+    .containerContents {
+        width: 100%; /* Define a largura como 100% */
+        display: flex; /* Usa flexbox para alinhar os itens */
+    }
+    .slots {
+        width: 100px; /* Define a largura */
+        height: 100px; /* Define a altura */
+    }
+}
+
+/* Estilo para telas entre 768px e 1024px */
+@media screen and (min-width: 768px) {
+    .containerContents {
+        width: 500px; /* Define a largura */
+    }
+    .slots {
+        width: 70px; /* Define a largura */
+        height: 70px; /* Define a altura */
+    }
+}
+
+/* Estilo para telas maiores que 1024px */
+@media screen and (min-width: 1024px) {
+    .slots {
+        width: 80px; /* Define a largura */
+        height: 80px; /* Define a altura */
+    }
+}
