@@ -4,8 +4,8 @@ function multiplicador() {
 
     // Array com os caminhos das imagens
     var imagens = [
-        "./images/j001.jpg",
-        "./images/j002.jpg",
+        "./images/Alice.jfif",
+        "./images/anime_002.jpg",
         "./images/j003.jpg",
         "./images/j004.jpg",
         "./images/j005.jpg",
