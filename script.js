@@ -35,7 +35,8 @@ function multiplicador() {
     // Função principal para iniciar o jogo
     function iniciarJogo() {
         // Validação da aposta
-        if (isNaN(aposta) {
+        if (isNaN(aposta)
+            {
             mostrarMensagem("Valor de aposta inválido!", "lost");
             return;
         }
