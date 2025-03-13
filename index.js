@@ -19,7 +19,7 @@ function multiplicador() {
     ];
 
     // Array com os pesos das imagens para seleção ponderada
-    var pesos = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05, 0.5, 0.5, 0.1];
+    var pesos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.00, 0.00, 0.0, 0.0, 0.1];
 
     // Array com os multiplicadores de ganhos para cada imagem
     var multiplicadores = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24];
@@ -91,7 +91,7 @@ function multiplicador() {
 
 
     function verifiqueSeGanhou() {
-        
+
         var linhas = [
             [resultados[0], resultados[1], resultados[2]], // Linha 1
             [resultados[3], resultados[4], resultados[5]], // Linha 2
