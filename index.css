@@ -32,7 +32,7 @@ html, body {
 /* Estilo para o título */
 .title {
     padding: 10px; /* Define o preenchimento interno */
-    color: white; /* Define a cor do texto */
+    color: greenyellow; /* Define a cor do texto */
     text-align: center; /* Centraliza o texto */
 }
 
