@@ -1,17 +1,68 @@
-function comprarCreditos() {
-    var creditos = document.getElementById("creditos");
-    var creditosValor = parseInt(creditos.value);
+// Configuração do Mercado Pago
+const mp = new MercadoPago('SUA_PUBLIC_KEY', {
+    locale: 'pt-BR'
+});
 
-    // Define a quantidade de créditos a serem adicionados
-    var creditosComprados = 1000; // Você pode ajustar esse valor
+// Função para comprar créditos com PIX
+async function iniciarPagamentoPix() {
+    const valorCreditos = 100; // Quantidade de créditos a serem comprados
+    const valorPagamento = 10.00; // Valor em reais a ser pago
 
-    // Adiciona os créditos comprados ao saldo atual
-    creditosValor += creditosComprados;
-    creditos.value = creditosValor;
+    try {
+        // Cria a cobrança PIX
+        const response = await fetch('/criar-pagamento-pix', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                valor: valorPagamento,
+                descricao: `Compra de ${valorCreditos} créditos`
+            })
+        });
 
-    alert("Você comprou " + creditosComprados + " créditos!");
+        const data = await response.json();
+
+        if (data.payment_id) {
+            // Exibe o QR Code do PIX
+            const qrCode = data.qr_code;
+            alert(`Escaneie o QR Code para pagar: ${qrCode}`);
+
+            // Verifica o pagamento
+            verificarPagamento(data.payment_id, valorCreditos);
+        } else {
+            alert("Erro ao criar o pagamento. Tente novamente.");
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao processar o pagamento.");
+    }
 }
 
+// Função para verificar o pagamento
+async function verificarPagamento(paymentId, creditosComprados) {
+    try {
+        const response = await fetch(`/verificar-pagamento?payment_id=${paymentId}`);
+        const data = await response.json();
+
+        if (data.status === 'approved') {
+            // Adiciona os créditos ao saldo do jogador
+            const creditos = document.getElementById("creditos");
+            let creditosValor = parseInt(creditos.value);
+            creditosValor += creditosComprados;
+            creditos.value = creditosValor;
+
+            alert("Pagamento aprovado! Créditos adicionados.");
+        } else {
+            alert("Pagamento não aprovado. Tente novamente.");
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao verificar o pagamento.");
+    }
+}
+
+// Lógica do jogo
 function multiplicador() {
     const quantidadeDeSlot = 9;
     var imagens = [
