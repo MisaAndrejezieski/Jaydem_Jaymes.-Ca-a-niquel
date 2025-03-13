@@ -58,7 +58,7 @@ button {
     padding: 10px 20px; /* Define o preenchimento interno */
     background: rgb(red, green, blue); /* Define a cor de fundo */
     outline: none; /* Remove o contorno padrão */
-    color: rgb(214, 252, 3); /* Define a cor do texto */
+    color: blue; /* Define a cor do texto */
     border: solid 1px red; /* Define a borda */
     border-radius: 5px; /* Define bordas arredondadas */
     cursor: pointer; /* Define o cursor como ponteiro */
