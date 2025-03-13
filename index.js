@@ -4,18 +4,18 @@ function multiplicador() {
 
     // Array com os caminhos das imagens
     var imagens = [
-        "./images/Alice.jfif",
-        "./images/anime_002.jpg",
-        "./images/j003.jpg",
-        "./images/j004.jpg",
-        "./images/j005.jpg",
-        "./images/j006.jpg",
-        "./images/j007.jpg",
-        "./images/j008.jpg",
-        "./images/j009.jpg",
-        "./images/j010.jpg",
-        "./images/j011.jpg",
-        "./images/D001.jpg"
+        "./images/a001.jpg",
+        "./images/a002.jpg",
+        "./images/a003.jpg",
+        "./images/a004.jpg",
+        "./images/a005.jpg",
+        "./images/a006.jpg",
+        "./images/a007.jpg",
+        "./images/a008.jpg",
+        "./images/a009.jpg",
+        "./images/a010.jpg",
+        "./images/a011.jpg",
+        "./images/a012.jpg"
     ];
 
     // Array com os pesos das imagens para seleção ponderada
