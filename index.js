@@ -89,33 +89,53 @@ function multiplicador() {
         }
     }
 
-    // Função para verificar se o jogador ganhou
+
     function verifiqueSeGanhou() {
-        // Define as linhas de slots
+        
         var linhas = [
-            [resultados[0], resultados[1], resultados[2]],
-            [resultados[3], resultados[4], resultados[5]],
-            [resultados[6], resultados[7], resultados[8]]
+            [resultados[0], resultados[1], resultados[2]], // Linha 1
+            [resultados[3], resultados[4], resultados[5]], // Linha 2
+            [resultados[6], resultados[7], resultados[8]]  // Linha 3
+        ];
+        var colunas = [
+            [resultados[0], resultados[3], resultados[6]], // Coluna 1
+            [resultados[1], resultados[4], resultados[7]], // Coluna 2
+            [resultados[2], resultados[5], resultados[8]]  // Coluna 3
         ];
 
         var ganhoTotal = 0;
         var ganhou = false;
 
-        // Verifica cada linha para ver se há três imagens iguais
+        // Verifica linhas
         for (var i = 0; i < linhas.length; i++) {
             if (linhas[i][0] === linhas[i][1] && linhas[i][0] === linhas[i][2]) {
                 var indiceImagem = imagens.indexOf(linhas[i][0]);
                 var multiplicadorGanho = multiplicadores[indiceImagem];
-                var ganho = apostaValor * multiplicadorGanho;
-                ganhoTotal += ganho;
+                ganhoTotal += apostaValor * multiplicadorGanho;
                 ganhou = true;
             }
         }
 
-        // Verifica se todas as imagens são iguais
-        if (resultados.every((val, i, arr) => val === arr[0])) {
-            ganhoTotal = ganho * 100;
-            ganhou = true;
+        // Verifica colunas
+        for (var i = 0; i < colunas.length; i++) {
+            if (colunas[i][0] === colunas[i][1] && colunas[i][0] === colunas[i][2]) {
+                var indiceImagem = imagens.indexOf(colunas[i][0]);
+                var multiplicadorGanho = multiplicadores[indiceImagem];
+                ganhoTotal += apostaValor * multiplicadorGanho;
+                ganhou = true;
+            }
+        }
+
+        if (ganhou) {
+            creditosValor += ganhoTotal;
+            creditos.value = creditosValor;
+            ganhos.value = ganhoTotal;
+            divResultado.innerHTML = "Parabéns! Você ganhou " + ganhoTotal + " créditos!";
+            divResultado.classList = 'won';
+        } else {
+            ganhos.value = 0;
+            divResultado.innerHTML = "Infelizmente você perdeu!";
+            divResultado.classList = 'lost';
         }
 
         // Atualiza os créditos e exibe a mensagem de resultado
