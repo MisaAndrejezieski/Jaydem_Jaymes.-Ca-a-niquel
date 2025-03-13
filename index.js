@@ -19,10 +19,10 @@ function multiplicador() {
     ];
 
     // Array com os pesos das imagens para seleção ponderada
-    var pesos = [0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.00, 0.00, 0.0, 0.0, 0.0];
+    var pesos = [0.3, 0.2, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.04, 0.03, 0.02, 0.01];
 
     // Array com os multiplicadores de ganhos para cada imagem
-    var multiplicadores = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24];
+    var multiplicadores = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
     // Array para armazenar os resultados dos slots
     var resultados = [];
