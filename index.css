@@ -32,7 +32,7 @@ html, body {
 /* Estilo para o título */
 .title {
     padding: 10px; /* Define o preenchimento interno */
-    color: #e0541c; /* Define a cor do texto */
+    color: #e9a185; /* Define a cor do texto */
     text-align: center; /* Centraliza o texto */
 }
 
@@ -98,7 +98,7 @@ button:hover {
     display: flex; /* Usa flexbox para alinhar os itens */
     justify-content: space-between; /* Distribui os itens com espaço entre eles */
     width: 100%; /* Define a largura como 100% */
-    color: blue;
+    color: black;
 }
 
 /* Estilo para os inputs de créditos, aposta e ganhos */
