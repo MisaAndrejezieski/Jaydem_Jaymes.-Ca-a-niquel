@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Define a codificação de caracteres como UTF-8 -->
+
     <meta charset="UTF-8">
-    <!-- Define a compatibilidade com o Internet Explorer -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Define a viewport para responsividade -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link para o arquivo CSS externo -->
-    <link rel="stylesheet" href="index.css">
-    <!-- Título da página -->
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="index.css">
     <title>Caça-níquel</title>
 </head>
 <body>
-    <!-- Contêiner principal -->
-    <div class="container">
-        <!-- Conteúdo do contêiner -->
+     <div class="container">
         <div class="containerContents">
             <!-- Título do jogo -->
             <div class="title">
@@ -23,23 +17,10 @@
             </div>
 
             <!-- Área de resultados -->
-            <label for="msg" id="results">Tenha uma bom jogo!</label>
+            <label for="msg" id="results">Jogar</label>
 
-            <!-- Área das imagens dos slots 
+            <!-- Área das imagens dos slots -->
             <div class="images">
-                <img class="slots slot-1" src="./images/a001.jpg" />
-                <img class="slots slot-2" src="./images/a002.jpg" />
-                <img class="slots slot-3" src="./images/a003.jpg" />
-                <img class="slots slot-4" src="./images/a004.jpg" />
-                <img class="slots slot-5" src="./images/a005.jpg" />
-                <img class="slots slot-6" src="./images/a006.jpg" />
-                <img class="slots slot-7" src="./images/a007.jpg" />
-                <img class="slots slot-8" src="./images/a008.jpg" />
-                <img class="slots slot-9" src="./images/a009.jpg" />
-            </div> --> 
-
-             <!-- Área das imagens dos slots -->
-             <div class="images">
                 <img class="slots slot-1" src="./images/a001.jpg" alt="Slot 1">
                 <img class="slots slot-2" src="./images/a002.jpg" alt="Slot 2">
                 <img class="slots slot-3" src="./images/a003.jpg" alt="Slot 3">
@@ -51,29 +32,34 @@
                 <img class="slots slot-9" src="./images/a009.jpg" alt="Slot 9">
             </div>
 
-            <!-- Área de créditos -->
-            <div class="credits">
-                <label for="creditos">Créditos: </label>
-                <input type="number" id="creditos" value="1000" readonly>
-            </div>
-
-            <!-- Área de aposta -->
-            <div class="bet">
-                <label for="aposta">Aposta: </label>
-                <input type="number" id="aposta" value="10">
-            </div>
-
-            <!-- Área de ganhos -->
-            <div class="winnings">
-                <label for="ganhos">Ganhos: </label>
-                <input type="number" id="ganhos" value="0" readonly>
+            <!-- Área de controle (créditos, aposta, ganhos, jogadas) -->
+            <div class="controls">
+                <div class="credits">
+                    <label for="creditos">Créditos: </label>
+                    <input type="number" id="creditos" value="1000" readonly>
+                </div>
+                <div class="bet">
+                    <label for="aposta">Aposta: </label>
+                    <input type="number" id="aposta" value="10">
+                </div>
+                <div class="winnings">
+                    <label for="ganhos">Ganhos: </label>
+                    <input type="number" id="ganhos" value="0" readonly>
+                </div>
+                <div class="plays">
+                    <label for="jogadas">Jogadas: </label>
+                    <input type="number" id="jogadas" value="0" readonly>
+                </div>
             </div>
 
             <!-- Botão para jogar -->
             <button type="button" id="botao" onclick="multiplicador();">Jogar</button>
+
+            <!-- Botão para comprar créditos -->
+            <button type="button" id="comprarCreditos" onclick="comprarCreditos();">Comprar Créditos</button>
         </div>
     </div>
-    <!-- Link para o arquivo JavaScript externo -->
+
     <script src="index.js"></script>
 </body>
 </html>
