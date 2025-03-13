@@ -98,7 +98,7 @@ button:hover {
     display: flex; /* Usa flexbox para alinhar os itens */
     justify-content: space-between; /* Distribui os itens com espaço entre eles */
     width: 100%; /* Define a largura como 100% */
-    color: black;
+    color: white;
 }
 
 /* Estilo para os inputs de créditos, aposta e ganhos */
