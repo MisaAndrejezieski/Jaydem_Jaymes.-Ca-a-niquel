@@ -59,7 +59,7 @@ button {
     background: rgb(red, green, blue); /* Define a cor de fundo */
     outline: none; /* Remove o contorno padrão */
     color: blue; /* Define a cor do texto */
-    border: solid 1px red; /* Define a borda */
+    border: solid 1px blue; /* Define a borda */
     border-radius: 5px; /* Define bordas arredondadas */
     cursor: pointer; /* Define o cursor como ponteiro */
     transition: all 0.3s ease; /* Adiciona uma transição suave */
