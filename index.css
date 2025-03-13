@@ -56,7 +56,7 @@ html, body {
 button {
     margin: 10px; /* Define a margem */
     padding: 10px 20px; /* Define o preenchimento interno */
-    background: red; /* Define a cor de fundo */
+    background: pink; /* Define a cor de fundo */
     outline: none; /* Remove o contorno padrão */
     color: blue; /* Define a cor do texto */
     border: solid 1px blue; /* Define a borda */
