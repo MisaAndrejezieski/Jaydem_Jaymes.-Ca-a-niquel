@@ -71,8 +71,8 @@ function multiplicador() {
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
         "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg"
     ];
-    var pesos = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05, 0.5, 0.5, 0.1];
-    var multiplicadores = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24];
+    var pesos = [0.08, 0.08, 0.05, 0.5, 0.05, 0.05, 0.05, 0.04, 0.04, 0.03, 0.02, 0.01];
+    var multiplicadores = [2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
     var resultados = [];
 
     var divImagens = document.querySelector(".images");
