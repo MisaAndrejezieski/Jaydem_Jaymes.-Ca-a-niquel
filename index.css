@@ -67,9 +67,9 @@ button {
 
 /* Estilo para os botões ao passar o mouse */
 button:hover {
-    color: white; /* Define a cor do texto */
-    border: solid 1px white; /* Define a cor da borda */
-    background-color: black; /* Define a cor de fundo */
+    color: red; /* Define a cor do texto */
+    border: solid 1px red; /* Define a cor da borda */
+    background-color: blue; /* Define a cor de fundo */
 }
 
 /* Estilo para a área de resultados */
