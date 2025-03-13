@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="index.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Caça-níquel</title>
 </head>
 <body>
-     <div class="container">
+    <div class="container">
         <div class="containerContents">
             <!-- Título do jogo -->
             <div class="title">
@@ -55,11 +54,14 @@
             <!-- Botão para jogar -->
             <button type="button" id="botao" onclick="multiplicador();">Jogar</button>
 
-            <!-- Botão para comprar créditos -->
-            <button type="button" id="comprarCreditos" onclick="comprarCreditos();">Comprar Créditos</button>
+            <!-- Botão para comprar créditos com PIX -->
+            <button type="button" id="comprarCreditosPix" onclick="iniciarPagamentoPix();">Comprar Créditos com PIX</button>
         </div>
     </div>
 
+    <!-- SDK do Mercado Pago -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <!-- Script do jogo -->
     <script src="index.js"></script>
 </body>
 </html>
