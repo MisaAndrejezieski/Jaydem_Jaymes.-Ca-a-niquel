@@ -16,7 +16,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./images/tumblr_c2e8441ba9e6c32473da1b447b369b55_3f7ab16a_500.webp') no-repeat center center fixed; /* GIF de fundo */
+    background: url('./images/background.gif') no-repeat center center fixed; /* GIF de fundo */
     background-size: cover;
     padding: 20px;
     box-sizing: border-box;
@@ -90,28 +90,24 @@ html, body {
 
 /* Estilo para os slots */
 .slots {
-    width: 100%;
-    max-width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 2px solid #ffcc00;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100px; /* Largura fixa para os slots */
+    height: 100px; /* Altura fixa para os slots */
+    object-fit: cover; /* Mantém a proporção da imagem e cobre o espaço */
+    border: 2px solid #ffcc00; /* Borda amarela */
+    border-radius: 10px; /* Bordas arredondadas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
 }
 
+/* Efeito de hover nos slots */
 .slots:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px #ffcc00;
+    transform: scale(1.1); /* Aumenta o tamanho do slot */
+    box-shadow: 0 0 15px #ffcc00; /* Efeito de brilho */
 }
 
-/* Animação de rotação dos slots */
-@keyframes spin {
-    0% { transform: rotateX(0deg); }
-    100% { transform: rotateX(360deg); }
-}
-
-.slots.rodando {
-    animation: spin 0.5s linear infinite;
+/* Estilo para os slots ganhadores */
+.slots.ganhou {
+    border: 4px solid #27ae60; /* Borda verde */
+    box-shadow: 0 0 15px #27ae60; /* Efeito de brilho */
 }
 
 /* Área de controle (créditos, aposta, ganhos, jogadas) */
@@ -177,7 +173,7 @@ button:active {
     }
 
     .slots {
-        width: 80px;
+        width: 80px; /* Reduz o tamanho dos slots em dispositivos móveis */
         height: 80px;
     }
 
@@ -193,13 +189,7 @@ button:active {
     }
 
     .slots {
-        width: 100px;
+        width: 100px; /* Mantém o tamanho padrão em telas maiores */
         height: 100px;
     }
-}
-
-/* Estilo para os slots ganhadores */
-.slots.ganhou {
-    border: 4px solid #27ae60; /* Borda verde */
-    box-shadow: 0 0 15px #27ae60; /* Efeito de brilho */
 }
