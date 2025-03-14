@@ -10,7 +10,7 @@ function multiplicador() {
         "./images/Mario Bros 001.jpg", "./images/Scooby Doo 001.jpg"
     ];
     var pesos = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.04, 0.04, 0.04, 0.04, 0.02, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    var multiplicadores = [1.5,1.5,1.5,1.5,1.5,1.5,2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
+    var multiplicadores = [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
     var resultados = [];
 
     var divImagens = document.querySelector(".images");
@@ -41,8 +41,11 @@ function multiplicador() {
     divResultado.classList = "";
     divResultado.innerHTML = "Rodando...";
 
-    // Inicia a rotação dos slots
+    // Remove bordas verdes de slots anteriores (se houver)
     var slots = document.querySelectorAll(".slots");
+    slots.forEach(slot => slot.classList.remove("ganhou"));
+
+    // Inicia a rotação dos slots
     slots.forEach(slot => slot.classList.add("rodando"));
 
     // Intervalo para mudar as imagens durante a rotação
@@ -100,6 +103,7 @@ function multiplicador() {
 
         var ganhoTotal = 0;
         var ganhou = false;
+        var slotsGanhadores = new Set(); // Armazena os índices dos slots ganhadores
 
         // Verifica linhas
         for (var i = 0; i < linhas.length; i++) {
@@ -108,6 +112,11 @@ function multiplicador() {
                 var multiplicadorGanho = multiplicadores[indiceImagem];
                 ganhoTotal += apostaValor * multiplicadorGanho;
                 ganhou = true;
+
+                // Adiciona os slots ganhadores ao conjunto
+                slotsGanhadores.add(i * 3);     // Primeiro slot da linha
+                slotsGanhadores.add(i * 3 + 1); // Segundo slot da linha
+                slotsGanhadores.add(i * 3 + 2); // Terceiro slot da linha
             }
         }
 
@@ -118,6 +127,11 @@ function multiplicador() {
                 var multiplicadorGanho = multiplicadores[indiceImagem];
                 ganhoTotal += apostaValor * multiplicadorGanho;
                 ganhou = true;
+
+                // Adiciona os slots ganhadores ao conjunto
+                slotsGanhadores.add(i);         // Primeiro slot da coluna
+                slotsGanhadores.add(i + 3);     // Segundo slot da coluna
+                slotsGanhadores.add(i + 6);     // Terceiro slot da coluna
             }
         }
 
@@ -128,6 +142,12 @@ function multiplicador() {
             ganhos.value = ganhoTotal;
             divResultado.innerHTML = "Parabéns! Você ganhou " + ganhoTotal + " créditos!";
             divResultado.classList = 'won';
+
+            // Adiciona borda verde aos slots ganhadores
+            slotsGanhadores.forEach(indice => {
+                var slotGanhador = document.querySelector(`.slot-${indice + 1}`);
+                slotGanhador.classList.add("ganhou");
+            });
         } else {
             ganhos.value = 0;
             divResultado.innerHTML = "Infelizmente você perdeu!";
