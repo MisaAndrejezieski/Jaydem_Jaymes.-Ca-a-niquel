@@ -197,3 +197,9 @@ button:active {
         height: 100px;
     }
 }
+
+/* Estilo para os slots ganhadores */
+.slots.ganhou {
+    border: 4px solid #27ae60; /* Borda verde */
+    box-shadow: 0 0 15px #27ae60; /* Efeito de brilho */
+}
