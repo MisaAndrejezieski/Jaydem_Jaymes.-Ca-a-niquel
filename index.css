@@ -19,7 +19,8 @@ html, body {
 
 /* Estilo para o conteúdo do contêiner */
 .containerContents {
-    background: url('./images/a016.jpg') no-repeat fixed center;
+    background: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    backdrop-filter: blur(5px); /* Efeito de desfoque */
     width: 300px;
     padding: 20px;
     border-radius: 10px;
@@ -50,26 +51,34 @@ html, body {
     width: 100px;
     height: 100px;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Animação de rotação dos slots */
+@keyframes spin {
+    0% { transform: rotateX(0deg); }
+    100% { transform: rotateX(360deg); }
+}
+
+.slots.rodando {
+    animation: spin 0.5s linear infinite;
 }
 
 /* Estilo para os botões */
 button {
     margin: 10px;
     padding: 10px 20px;
-    background: pink;
-    outline: none;
-    color: blue;
-    border: solid 1px blue;
+    background: #3498db;
+    color: #fff;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 /* Estilo para os botões ao passar o mouse */
 button:hover {
-    color: greenyellow;
-    border: solid 1px greenyellow;
-    background-color: blue;
+    background: #2980b9;
 }
 
 /* Estilo para a área de resultados */
@@ -80,6 +89,7 @@ button:hover {
     background: #7f8c8d;
     border-radius: 5px;
     text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 /* Estilo para a área de resultados quando o jogador ganha */
@@ -93,29 +103,42 @@ button:hover {
 }
 
 /* Estilo para as áreas de créditos, aposta e ganhos */
-.credits, .bet, .winnings {
-    margin: 10px 0;
+.controls {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
 }
 
-/* Estilo para os inputs de créditos, aposta e ganhos */
+.credits, .bet, .winnings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.credits label, .bet label, .winnings label {
+    font-weight: bold;
+    color: #fff;
+}
+
 .credits input, .bet input, .winnings input {
-    width: 50%;
+    width: 60%;
     padding: 5px;
     text-align: right;
+    background: #34495e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
 }
 
 /* Estilo para telas menores que 768px */
 @media screen and (max-width: 767.98px) {
     .containerContents {
         width: 100%;
-        display: flex;
     }
     .slots {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
 }
 
