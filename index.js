@@ -1,4 +1,3 @@
-// Lógica do jogo
 function multiplicador() {
     const quantidadeDeSlot = 9;
     var imagens = [
