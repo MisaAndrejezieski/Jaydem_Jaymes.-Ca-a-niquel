@@ -3,18 +3,32 @@ const mp = new MercadoPago('SUA_PUBLIC_KEY', {
     locale: 'pt-BR'
 });
 
+// Função para criar mensagens dinâmicas
+function exibirMensagem(elemento, mensagem, classe) {
+    elemento.innerHTML = mensagem;
+    elemento.className = classe || '';
+}
+
+// Função para validar a aposta
+function validarAposta(apostaValor, creditosValor) {
+    if (apostaValor <= 0) {
+        return "O valor da aposta deve ser maior que zero.";
+    }
+    if (apostaValor > creditosValor) {
+        return "Créditos insuficientes para essa aposta.";
+    }
+    return null;
+}
+
 // Função para comprar créditos com PIX
 async function iniciarPagamentoPix() {
     const valorCreditos = 100; // Quantidade de créditos a serem comprados
     const valorPagamento = 10.00; // Valor em reais a ser pago
 
     try {
-        // Cria a cobrança PIX
         const response = await fetch('/criar-pagamento-pix', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 valor: valorPagamento,
                 descricao: `Compra de ${valorCreditos} créditos`
@@ -24,17 +38,13 @@ async function iniciarPagamentoPix() {
         const data = await response.json();
 
         if (data.payment_id) {
-            // Exibe o QR Code do PIX
-            const qrCode = data.qr_code;
-            alert(`Escaneie o QR Code para pagar: ${qrCode}`);
-
-            // Verifica o pagamento
+            alert(`Escaneie o QR Code para pagar: ${data.qr_code}`);
             verificarPagamento(data.payment_id, valorCreditos);
         } else {
             alert("Erro ao criar o pagamento. Tente novamente.");
         }
     } catch (error) {
-        console.error("Erro:", error);
+        console.error("Erro ao processar o pagamento:", error);
         alert("Erro ao processar o pagamento.");
     }
 }
@@ -46,18 +56,14 @@ async function verificarPagamento(paymentId, creditosComprados) {
         const data = await response.json();
 
         if (data.status === 'approved') {
-            // Adiciona os créditos ao saldo do jogador
             const creditos = document.getElementById("creditos");
-            let creditosValor = parseInt(creditos.value);
-            creditosValor += creditosComprados;
-            creditos.value = creditosValor;
-
+            creditos.value = parseInt(creditos.value) + creditosComprados;
             alert("Pagamento aprovado! Créditos adicionados.");
         } else {
             alert("Pagamento não aprovado. Tente novamente.");
         }
     } catch (error) {
-        console.error("Erro:", error);
+        console.error("Erro ao verificar o pagamento:", error);
         alert("Erro ao verificar o pagamento.");
     }
 }
@@ -65,118 +71,94 @@ async function verificarPagamento(paymentId, creditosComprados) {
 // Lógica do jogo
 function multiplicador() {
     const quantidadeDeSlot = 9;
-    var imagens = [
+    const imagens = [
         "./images/a001.jpg", "./images/a002.jpg", "./images/a003.jpg",
         "./images/a004.jpg", "./images/a005.jpg", "./images/a006.jpg",
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
         "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg"
     ];
-    var pesos = [0.08, 0.08, 0.05, 0.5, 0.05, 0.05, 0.05, 0.04, 0.04, 0.03, 0.02, 0.01];
-    var multiplicadores = [2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
-    var resultados = [];
+    const pesos = [0.08, 0.08, 0.05, 0.5, 0.05, 0.05, 0.05, 0.04, 0.04, 0.03, 0.02, 0.01];
+    const multiplicadores = [2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
+    const resultados = [];
+    const divResultado = document.getElementById("results");
+    const creditos = document.getElementById("creditos");
+    const aposta = document.getElementById("aposta");
+    const ganhos = document.getElementById("ganhos");
+    const jogadas = document.getElementById("jogadas");
 
-    var divImagens = document.querySelector(".images");
-    var divResultado = document.getElementById("results");
-    var creditos = document.getElementById("creditos");
-    var aposta = document.getElementById("aposta");
-    var ganhos = document.getElementById("ganhos");
-    var jogadas = document.getElementById("jogadas");
+    const apostaValor = parseInt(aposta.value);
+    const creditosValor = parseInt(creditos.value);
 
-    var apostaValor = parseInt(aposta.value);
-    var creditosValor = parseInt(creditos.value);
-    var jogadasValor = parseInt(jogadas.value);
-
-    if (apostaValor > creditosValor) {
-        divResultado.innerHTML = "Créditos insuficientes!";
-        divResultado.classList = 'lost';
+    // Validações de aposta
+    const erro = validarAposta(apostaValor, creditosValor);
+    if (erro) {
+        exibirMensagem(divResultado, erro, 'lost');
         return;
     }
 
-    creditosValor -= apostaValor;
-    creditos.value = creditosValor;
-    jogadasValor += 1;
-    jogadas.value = jogadasValor;
+    // Atualizar créditos e jogadas
+    creditos.value = creditosValor - apostaValor;
+    jogadas.value = parseInt(jogadas.value) + 1;
 
-    divResultado.classList = "";
-    divResultado.innerHTML = "Rodando...";
+    exibirMensagem(divResultado, "Rodando...", "");
 
-    var rodando = setInterval(rodar, 100);
-    setTimeout(function () {
+    const rodando = setInterval(() => rodar(quantidadeDeSlot, imagens, pesos, resultados), 100);
+
+    setTimeout(() => {
         clearInterval(rodando);
-        verifiqueSeGanhou();
+        verifiqueSeGanhou(resultados, imagens, multiplicadores, apostaValor, creditos, ganhos, divResultado);
     }, 500);
 
-    function rodar() {
-        for (var i = 0; i < quantidadeDeSlot; i++) {
-            var aleatorio = selecionarImagemComPeso();
-            var slotName = '.slot-' + (i + 1);
-            var slotAtual = divImagens.querySelector(slotName);
+    function rodar(quantidadeDeSlot, imagens, pesos, resultados) {
+        const divImagens = document.querySelector(".images");
+
+        for (let i = 0; i < quantidadeDeSlot; i++) {
+            const aleatorio = selecionarImagemComPeso(pesos);
+            const slotAtual = divImagens.querySelector(`.slot-${i + 1}`);
             slotAtual.src = imagens[aleatorio];
             resultados[i] = imagens[aleatorio];
         }
     }
 
-    function selecionarImagemComPeso() {
-        var totalPesos = pesos.reduce((a, b) => a + b, 0);
-        var numeroAleatorio = Math.random() * totalPesos;
-        var somaPesos = 0;
-        for (var i = 0; i < pesos.length; i++) {
+    function selecionarImagemComPeso(pesos) {
+        const totalPesos = pesos.reduce((a, b) => a + b, 0);
+        let somaPesos = 0;
+        const numeroAleatorio = Math.random() * totalPesos;
+        for (let i = 0; i < pesos.length; i++) {
             somaPesos += pesos[i];
-            if (numeroAleatorio < somaPesos) {
-                return i;
-            }
+            if (numeroAleatorio < somaPesos) return i;
         }
     }
 
-    function verifiqueSeGanhou() {
-        var linhas = [
-            [resultados[0], resultados[1], resultados[2]], // Linha 1
-            [resultados[3], resultados[4], resultados[5]], // Linha 2
-            [resultados[6], resultados[7], resultados[8]]  // Linha 3
-        ];
-        var colunas = [
-            [resultados[0], resultados[3], resultados[6]], // Coluna 1
-            [resultados[1], resultados[4], resultados[7]], // Coluna 2
-            [resultados[2], resultados[5], resultados[8]]  // Coluna 3
+    function verifiqueSeGanhou(resultados, imagens, multiplicadores, apostaValor, creditos, ganhos, divResultado) {
+        const padroes = [
+            // Linhas
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            // Colunas
+            [0, 3, 6], [1, 4, 7], [2, 5, 8]
         ];
 
-        var ganhoTotal = 0;
-        var ganhou = false;
+        let ganhoTotal = 0;
+        let ganhou = false;
 
-        // Verifica linhas
-        for (var i = 0; i < linhas.length; i++) {
-            if (linhas[i][0] === linhas[i][1] && linhas[i][0] === linhas[i][2]) {
-                var indiceImagem = imagens.indexOf(linhas[i][0]);
-                var multiplicadorGanho = multiplicadores[indiceImagem];
-                ganhoTotal += apostaValor * multiplicadorGanho;
-                ganhou = true;
-            }
-        }
-
-        // Verifica colunas
-        for (var i = 0; i < colunas.length; i++) {
-            if (colunas[i][0] === colunas[i][1] && colunas[i][0] === colunas[i][2]) {
-                var indiceImagem = imagens.indexOf(colunas[i][0]);
-                var multiplicadorGanho = multiplicadores[indiceImagem];
-                ganhoTotal += apostaValor * multiplicadorGanho;
+        for (const padrao of padroes) {
+            if (resultados[padrao[0]] === resultados[padrao[1]] && resultados[padrao[0]] === resultados[padrao[2]]) {
+                const indiceImagem = imagens.indexOf(resultados[padrao[0]]);
+                ganhoTotal += apostaValor * multiplicadores[indiceImagem];
                 ganhou = true;
             }
         }
 
         if (ganhou) {
-            creditosValor += ganhoTotal;
-            creditos.value = creditosValor;
+            creditos.value = parseInt(creditos.value) + ganhoTotal;
             ganhos.value = ganhoTotal;
-            divResultado.innerHTML = "Parabéns! Você ganhou " + ganhoTotal + " créditos!";
-            divResultado.classList = 'won';
+            exibirMensagem(divResultado, `Parabéns! Você ganhou ${ganhoTotal} créditos!`, 'won');
         } else {
             ganhos.value = 0;
-            divResultado.innerHTML = "Infelizmente você perdeu!";
-            divResultado.classList = 'lost';
+            exibirMensagem(divResultado, "Infelizmente você perdeu!", 'lost');
         }
 
-        // Zera o contador de jogadas se os créditos acabarem
-        if (creditosValor <= 0) {
+        if (parseInt(creditos.value) <= 0) {
             jogadas.value = 0;
         }
     }
