@@ -92,9 +92,10 @@ html, body {
 .slots {
     width: 100px; /* Largura fixa para os slots */
     height: 100px; /* Altura fixa para os slots */
-    object-fit: cover; /* Mantém a proporção da imagem e cobre o espaço */
+    object-fit: contain; /* Mantém a proporção da imagem sem cortar */
     border: 2px solid #ffcc00; /* Borda amarela */
     border-radius: 10px; /* Bordas arredondadas */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
 }
 
