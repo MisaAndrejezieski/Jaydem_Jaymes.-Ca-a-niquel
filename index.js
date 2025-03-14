@@ -135,6 +135,26 @@ function multiplicador() {
             }
         }
 
+        // Verifica quantas vezes cada imagem aparece nos resultados
+        var contagemImagens = {};
+        resultados.forEach(imagem => {
+            if (contagemImagens[imagem]) {
+                contagemImagens[imagem]++;
+            } else {
+                contagemImagens[imagem] = 1;
+            }
+        });
+
+        // Aplica multiplicador adicional para 6 ou 9 imagens iguais
+        for (var imagem in contagemImagens) {
+            if (contagemImagens[imagem] >= 6) {
+                var indiceImagem = imagens.indexOf(imagem);
+                var multiplicadorAdicional = (contagemImagens[imagem] >= 9) ? 3 : 2; // Triplica se 9, dobra se 6
+                ganhoTotal *= multiplicadorAdicional;
+                divResultado.innerHTML += ` (${multiplicadorAdicional}x por ${contagemImagens[imagem]} imagens iguais!)`;
+            }
+        }
+
         // Atualiza o estado do jogo com base no resultado
         if (ganhou) {
             creditosValor += ganhoTotal;
