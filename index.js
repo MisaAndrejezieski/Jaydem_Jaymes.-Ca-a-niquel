@@ -1,67 +1,3 @@
-// Configuração do Mercado Pago
-const mp = new MercadoPago('SUA_PUBLIC_KEY', {
-    locale: 'pt-BR'
-});
-
-// Função para comprar créditos com PIX
-async function iniciarPagamentoPix() {
-    const valorCreditos = 100; // Quantidade de créditos a serem comprados
-    const valorPagamento = 10.00; // Valor em reais a ser pago
-
-    try {
-        // Cria a cobrança PIX
-        const response = await fetch('/criar-pagamento-pix', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                valor: valorPagamento,
-                descricao: `Compra de ${valorCreditos} créditos`
-            })
-        });
-
-        const data = await response.json();
-
-        if (data.payment_id) {
-            // Exibe o QR Code do PIX
-            const qrCode = data.qr_code;
-            alert(`Escaneie o QR Code para pagar: ${qrCode}`);
-
-            // Verifica o pagamento
-            verificarPagamento(data.payment_id, valorCreditos);
-        } else {
-            alert("Erro ao criar o pagamento. Tente novamente.");
-        }
-    } catch (error) {
-        console.error("Erro:", error);
-        alert("Erro ao processar o pagamento.");
-    }
-}
-
-// Função para verificar o pagamento
-async function verificarPagamento(paymentId, creditosComprados) {
-    try {
-        const response = await fetch(`/verificar-pagamento?payment_id=${paymentId}`);
-        const data = await response.json();
-
-        if (data.status === 'approved') {
-            // Adiciona os créditos ao saldo do jogador
-            const creditos = document.getElementById("creditos");
-            let creditosValor = parseInt(creditos.value);
-            creditosValor += creditosComprados;
-            creditos.value = creditosValor;
-
-            alert("Pagamento aprovado! Créditos adicionados.");
-        } else {
-            alert("Pagamento não aprovado. Tente novamente.");
-        }
-    } catch (error) {
-        console.error("Erro:", error);
-        alert("Erro ao verificar o pagamento.");
-    }
-}
-
 // Lógica do jogo
 function multiplicador() {
     const quantidadeDeSlot = 9;
@@ -86,26 +22,31 @@ function multiplicador() {
     var creditosValor = parseInt(creditos.value);
     var jogadasValor = parseInt(jogadas.value);
 
+    // Verifica se o jogador tem créditos suficientes
     if (apostaValor > creditosValor) {
         divResultado.innerHTML = "Créditos insuficientes!";
         divResultado.classList = 'lost';
         return;
     }
 
+    // Deduz a aposta dos créditos e incrementa o contador de jogadas
     creditosValor -= apostaValor;
     creditos.value = creditosValor;
     jogadasValor += 1;
     jogadas.value = jogadasValor;
 
+    // Reseta o estado do resultado
     divResultado.classList = "";
     divResultado.innerHTML = "Rodando...";
 
+    // Simula a rotação dos slots
     var rodando = setInterval(rodar, 100);
     setTimeout(function () {
         clearInterval(rodando);
         verifiqueSeGanhou();
     }, 500);
 
+    // Função para rodar os slots
     function rodar() {
         for (var i = 0; i < quantidadeDeSlot; i++) {
             var aleatorio = selecionarImagemComPeso();
@@ -116,6 +57,7 @@ function multiplicador() {
         }
     }
 
+    // Função para selecionar uma imagem com base nos pesos
     function selecionarImagemComPeso() {
         var totalPesos = pesos.reduce((a, b) => a + b, 0);
         var numeroAleatorio = Math.random() * totalPesos;
@@ -128,6 +70,7 @@ function multiplicador() {
         }
     }
 
+    // Função para verificar se o jogador ganhou
     function verifiqueSeGanhou() {
         var linhas = [
             [resultados[0], resultados[1], resultados[2]], // Linha 1
@@ -163,6 +106,7 @@ function multiplicador() {
             }
         }
 
+        // Atualiza o estado do jogo com base no resultado
         if (ganhou) {
             creditosValor += ganhoTotal;
             creditos.value = creditosValor;
