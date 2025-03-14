@@ -9,8 +9,8 @@ function multiplicador() {
         "./images/Chaves 001.jpg", "./images/Desafios e Limitações da Realidade Aumentada.jpg", 
         "./images/Mario Bros 001.jpg", "./images/Scooby Doo 001.jpg"
     ];
-    var pesos = [0.05, 0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.04, 0.04, 0.04, 0.04, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03];
-    var multiplicadores = [1.5, 0.5, 1.5, 1.5, 1.5, 1.5, 2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
+    var pesos = [0.25, 0.25, 0.15, 0.15, 0.05, 0.05, 0.05, 0.04, 0.04, 0.04, 0.04, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03];
+    var multiplicadores = [0.5, 0.5, 1.5, 1.5, 1.5, 1.5, 2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
     var resultados = [];
 
     var divImagens = document.querySelector(".images");
