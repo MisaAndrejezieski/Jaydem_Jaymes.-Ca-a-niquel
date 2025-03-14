@@ -24,7 +24,7 @@ html, body {
 
 /* Conteúdo do contêiner */
 .containerContents {
-    background: url('./images/alice-hana.gif')/* rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
     backdrop-filter: blur(10px); /* Efeito de desfoque */
     width: 100%;
     max-width: 500px;
