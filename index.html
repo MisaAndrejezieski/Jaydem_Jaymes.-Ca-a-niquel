@@ -16,7 +16,7 @@
             </div>
 
             <!-- Área de resultados -->
-            <label for="msg" id="results">Jogar</label>
+            <label for="msg" id="results">Bem-vindo! Faça sua aposta para começar.</label>
 
             <!-- Área das imagens dos slots -->
             <div class="images">
@@ -51,35 +51,40 @@
                 </div>
             </div>
 
-            <!-- Botão para jogar -->
-            <button type="button" id="botao" onclick="multiplicador();">Jogar</button>
+            <!-- Botões de controle do jogo -->
+            <button type="button" id="confirmarAposta" onclick="confirmarAposta()">Confirmar Aposta</button>
+            <button type="button" id="botao" onclick="multiplicador()">Jogar</button>
 
             <!-- Botão para comprar créditos com PIX -->
-            <button type="button" id="comprarCreditosPix" onclick="iniciarPagamentoPix();">Comprar Créditos com PIX</button>
-
-            <!-- Container para QR Code -->
-            <div id="qrCodeContainer" class="qr-code-container"></div>
+            <button type="button" id="comprarCreditosPix" onclick="abrirModalQRCode()">Comprar Créditos com PIX</button>
 
             <!-- Link para o menu de configurações -->
             <button type="button" onclick="abrirMenuConfiguracoes()">Configurações</button>
         </div>
     </div>
 
-    <!-- Menu de configurações (pop-up escondido por padrão) -->
+    <!-- Modal de QR Code -->
+    <div id="qrCodeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModalQRCode()">&times;</span>
+            <h3>Escaneie o QR Code para adicionar créditos:</h3>
+            <div id="qrCodeContainer"></div>
+        </div>
+    </div>
+
+    <!-- Menu de configurações -->
     <div id="configuracoes" class="configuracoes">
         <h3>Menu de Configurações (Administrador)</h3>
         <label for="adminUser">Usuário Admin:</label>
         <input type="text" id="adminUser">
         <label for="adminSenha">Senha Admin:</label>
         <input type="password" id="adminSenha">
-        <label for="qrCodeUrl">URL do QR Code:</label>
-        <input type="text" id="qrCodeUrl">
+        <label for="qrCodeImage">Upload do QR Code:</label>
+        <input type="file" id="qrCodeImage" accept="image/*">
         <button onclick="salvarConfiguracoes()">Salvar</button>
         <button onclick="fecharMenuConfiguracoes()">Fechar</button>
     </div>
 
-    <!-- SDK do Mercado Pago -->
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <!-- Script do jogo -->
     <script src="index.js"></script>
 </body>
