@@ -1,152 +1,183 @@
-// Configuração inicial do sistema
-const configuracoes = {
-    adminEmail: "admin@exemplo.com", // E-mail do administrador
-    qrCodeUrl: "./images/qrcode.png", // QR Code salvo no código
-    emailService: "https://email-service.com/send" // Simulação do envio de e-mail
-};
+// Configuração do Mercado Pago
+const mp = new MercadoPago('SUA_PUBLIC_KEY', {
+    locale: 'pt-BR'
+});
 
-// Função para exibir mensagens dinâmicas no jogo
-function exibirMensagem(elemento, mensagem, classe) {
-    elemento.innerHTML = mensagem;
-    elemento.className = classe || '';
-}
+// Função para comprar créditos com PIX
+async function iniciarPagamentoPix() {
+    const valorCreditos = 100; // Quantidade de créditos a serem comprados
+    const valorPagamento = 10.00; // Valor em reais a ser pago
 
-// Solicitação de pagamento via QR Code
-function solicitarPagamento() {
-    const qrCodeDiv = document.getElementById("qrCodeContainer");
-    qrCodeDiv.innerHTML = `<img src="${configuracoes.qrCodeUrl}" alt="QR Code para pagamento">`;
-    document.getElementById("qrCodeModal").style.display = "flex";
-
-    // Envia um e-mail ao administrador para confirmação
-    enviarEmailAdmin();
-}
-
-// Fecha o modal de QR Code
-function fecharModalQRCode() {
-    document.getElementById("qrCodeModal").style.display = "none";
-    exibirMensagem(document.getElementById("results"), "Aguarde a confirmação do administrador.", "processing");
-}
-
-// Simulação de envio de e-mail para o administrador
-function enviarEmailAdmin() {
-    const emailPayload = {
-        to: configuracoes.adminEmail,
-        subject: "Confirmação de pagamento necessária",
-        body: "Um jogador solicitou a compra de créditos. Confirme o pagamento para adicionar os créditos."
-    };
-
-    fetch(configuracoes.emailService, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(emailPayload)
-    })
-        .then((response) => {
-            if (response.ok) {
-                alert("E-mail enviado ao administrador.");
-            } else {
-                alert("Falha ao enviar o e-mail. Tente novamente.");
-            }
-        })
-        .catch((error) => {
-            console.error("Erro ao enviar e-mail:", error);
-            alert("Erro ao notificar o administrador.");
+    try {
+        // Cria a cobrança PIX
+        const response = await fetch('/criar-pagamento-pix', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                valor: valorPagamento,
+                descricao: `Compra de ${valorCreditos} créditos`
+            })
         });
-}
 
-// Lógica do jogo e dos slots
-function multiplicador() {
-    const divResultado = document.getElementById("results");
-    const aposta = parseInt(document.getElementById("aposta").value) || 0;
-    const creditos = document.getElementById("creditos");
-    let creditosValor = parseInt(creditos.value);
+        const data = await response.json();
 
-    // Validação da aposta
-    if (aposta <= 0 || aposta > creditosValor) {
-        exibirMensagem(divResultado, "Aposta inválida. Verifique seus créditos.", "error");
-        return;
-    }
+        if (data.payment_id) {
+            // Exibe o QR Code do PIX
+            const qrCode = data.qr_code;
+            alert(`Escaneie o QR Code para pagar: ${qrCode}`);
 
-    // Deduz a aposta dos créditos
-    creditosValor -= aposta;
-    creditos.value = creditosValor;
-    exibirMensagem(divResultado, "Rodando os slots...", "processing");
-
-    // Animação dos slots
-    const slots = document.querySelectorAll(".slot-container");
-    const resultados = [];
-    slots.forEach((slot) => {
-        slot.innerHTML = ""; // Limpa o slot anterior
-        const imgIndex = Math.floor(Math.random() * 12) + 1; // Seleciona imagem aleatória
-        const img = document.createElement("img");
-        img.src = `./images/a00${imgIndex}.jpg`; // Caminho da imagem
-        img.className = "slot-spin"; // Adiciona classe de animação
-        slot.appendChild(img);
-        resultados.push(imgIndex); // Registra o resultado
-    });
-
-    // Calcula o resultado após a animação
-    setTimeout(() => {
-        calcularResultado(resultados, aposta, creditos, divResultado);
-    }, 2000);
-}
-
-// Cálculo do resultado após a rodada dos slots
-function calcularResultado(resultados, aposta, creditos, divResultado) {
-    const padroes = [
-        // Linhas
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        // Colunas
-        [0, 3, 6], [1, 4, 7], [2, 5, 8]
-    ];
-
-    let ganhoTotal = 0;
-    let ganhou = false;
-
-    padroes.forEach((padrao) => {
-        if (resultados[padrao[0]] === resultados[padrao[1]] && resultados[padrao[0]] === resultados[padrao[2]]) {
-            ganhoTotal += aposta * 2; // Multiplica o ganho
-            ganhou = true;
+            // Verifica o pagamento
+            verificarPagamento(data.payment_id, valorCreditos);
+        } else {
+            alert("Erro ao criar o pagamento. Tente novamente.");
         }
-    });
-
-    if (ganhou) {
-        creditos.value = parseInt(creditos.value) + ganhoTotal;
-        exibirMensagem(divResultado, `Parabéns! Você ganhou ${ganhoTotal} créditos!`, "won");
-    } else {
-        exibirMensagem(divResultado, "Você perdeu. Tente novamente!", "lost");
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao processar o pagamento.");
     }
 }
 
-// Função para salvar configurações do administrador
-function salvarConfiguracoes() {
-    const adminUser = document.getElementById("adminUser").value;
-    const adminSenha = document.getElementById("adminSenha").value;
-    const adminEmail = document.getElementById("adminEmail").value;
+// Função para verificar o pagamento
+async function verificarPagamento(paymentId, creditosComprados) {
+    try {
+        const response = await fetch(`/verificar-pagamento?payment_id=${paymentId}`);
+        const data = await response.json();
 
-    if (!adminUser || !adminSenha || !adminEmail) {
-        alert("Preencha todos os campos antes de salvar.");
+        if (data.status === 'approved') {
+            // Adiciona os créditos ao saldo do jogador
+            const creditos = document.getElementById("creditos");
+            let creditosValor = parseInt(creditos.value);
+            creditosValor += creditosComprados;
+            creditos.value = creditosValor;
+
+            alert("Pagamento aprovado! Créditos adicionados.");
+        } else {
+            alert("Pagamento não aprovado. Tente novamente.");
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao verificar o pagamento.");
+    }
+}
+
+// Lógica do jogo
+function multiplicador() {
+    const quantidadeDeSlot = 9;
+    var imagens = [
+        "./images/a001.jpg", "./images/a002.jpg", "./images/a003.jpg",
+        "./images/a004.jpg", "./images/a005.jpg", "./images/a006.jpg",
+        "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
+        "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg"
+    ];
+    var pesos = [0.08, 0.08, 0.05, 0.5, 0.05, 0.05, 0.05, 0.04, 0.04, 0.03, 0.02, 0.01];
+    var multiplicadores = [2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
+    var resultados = [];
+
+    var divImagens = document.querySelector(".images");
+    var divResultado = document.getElementById("results");
+    var creditos = document.getElementById("creditos");
+    var aposta = document.getElementById("aposta");
+    var ganhos = document.getElementById("ganhos");
+    var jogadas = document.getElementById("jogadas");
+
+    var apostaValor = parseInt(aposta.value);
+    var creditosValor = parseInt(creditos.value);
+    var jogadasValor = parseInt(jogadas.value);
+
+    if (apostaValor > creditosValor) {
+        divResultado.innerHTML = "Créditos insuficientes!";
+        divResultado.classList = 'lost';
         return;
     }
 
-    configuracoes.adminEmail = adminEmail;
-    alert("Configurações salvas com sucesso!");
-    fecharMenuConfiguracoes();
-}
+    creditosValor -= apostaValor;
+    creditos.value = creditosValor;
+    jogadasValor += 1;
+    jogadas.value = jogadasValor;
 
-// Função para abrir o menu de configurações
-function abrirMenuConfiguracoes() {
-    const menu = document.getElementById("configuracoes");
-    menu.style.display = "block";
+    divResultado.classList = "";
+    divResultado.innerHTML = "Rodando...";
 
-    document.getElementById("adminUser").value = configuracoes.adminUser || "admin";
-    document.getElementById("adminSenha").value = configuracoes.adminSenha || "1234";
-    document.getElementById("adminEmail").value = configuracoes.adminEmail || "admin@exemplo.com";
-}
+    var rodando = setInterval(rodar, 100);
+    setTimeout(function () {
+        clearInterval(rodando);
+        verifiqueSeGanhou();
+    }, 500);
 
-// Função para fechar o menu de configurações
-function fecharMenuConfiguracoes() {
-    const menu = document.getElementById("configuracoes");
-    menu.style.display = "none";
+    function rodar() {
+        for (var i = 0; i < quantidadeDeSlot; i++) {
+            var aleatorio = selecionarImagemComPeso();
+            var slotName = '.slot-' + (i + 1);
+            var slotAtual = divImagens.querySelector(slotName);
+            slotAtual.src = imagens[aleatorio];
+            resultados[i] = imagens[aleatorio];
+        }
+    }
+
+    function selecionarImagemComPeso() {
+        var totalPesos = pesos.reduce((a, b) => a + b, 0);
+        var numeroAleatorio = Math.random() * totalPesos;
+        var somaPesos = 0;
+        for (var i = 0; i < pesos.length; i++) {
+            somaPesos += pesos[i];
+            if (numeroAleatorio < somaPesos) {
+                return i;
+            }
+        }
+    }
+
+    function verifiqueSeGanhou() {
+        var linhas = [
+            [resultados[0], resultados[1], resultados[2]], // Linha 1
+            [resultados[3], resultados[4], resultados[5]], // Linha 2
+            [resultados[6], resultados[7], resultados[8]]  // Linha 3
+        ];
+        var colunas = [
+            [resultados[0], resultados[3], resultados[6]], // Coluna 1
+            [resultados[1], resultados[4], resultados[7]], // Coluna 2
+            [resultados[2], resultados[5], resultados[8]]  // Coluna 3
+        ];
+
+        var ganhoTotal = 0;
+        var ganhou = false;
+
+        // Verifica linhas
+        for (var i = 0; i < linhas.length; i++) {
+            if (linhas[i][0] === linhas[i][1] && linhas[i][0] === linhas[i][2]) {
+                var indiceImagem = imagens.indexOf(linhas[i][0]);
+                var multiplicadorGanho = multiplicadores[indiceImagem];
+                ganhoTotal += apostaValor * multiplicadorGanho;
+                ganhou = true;
+            }
+        }
+
+        // Verifica colunas
+        for (var i = 0; i < colunas.length; i++) {
+            if (colunas[i][0] === colunas[i][1] && colunas[i][0] === colunas[i][2]) {
+                var indiceImagem = imagens.indexOf(colunas[i][0]);
+                var multiplicadorGanho = multiplicadores[indiceImagem];
+                ganhoTotal += apostaValor * multiplicadorGanho;
+                ganhou = true;
+            }
+        }
+
+        if (ganhou) {
+            creditosValor += ganhoTotal;
+            creditos.value = creditosValor;
+            ganhos.value = ganhoTotal;
+            divResultado.innerHTML = "Parabéns! Você ganhou " + ganhoTotal + " créditos!";
+            divResultado.classList = 'won';
+        } else {
+            ganhos.value = 0;
+            divResultado.innerHTML = "Infelizmente você perdeu!";
+            divResultado.classList = 'lost';
+        }
+
+        // Zera o contador de jogadas se os créditos acabarem
+        if (creditosValor <= 0) {
+            jogadas.value = 0;
+        }
+    }
 }
