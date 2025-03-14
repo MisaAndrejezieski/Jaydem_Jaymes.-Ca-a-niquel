@@ -6,10 +6,9 @@ function multiplicador() {
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
         "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg",
         "./images/a013.jpg", "./images/a014.jpg", "./images/a015.jpg",
-        "./images/a016.jpg", "./images/a017.jpg", "./images/a018.jpg",
     ];
-    var pesos = [5, 1, 1, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.10, 0.10, 0.10, 0.05, 0.05, 0.05, 0.03, 0.03, 0.02];
-    var multiplicadores = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var pesos = [5, 1, 1, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.10, 0.10, 0.10, 0.05, 0.05, 0.05];
+    var multiplicadores = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9];
     var resultados = [];
 
     var divImagens = document.querySelector(".images");
