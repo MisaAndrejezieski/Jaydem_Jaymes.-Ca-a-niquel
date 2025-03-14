@@ -1,218 +1,139 @@
-/* Define o estilo básico para o HTML e o corpo */
+/* Define o estilo básico para o HTML e o corpo da página */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Roboto', sans-serif;
-    background-color: #1a1a1a; /* Fundo escuro para destacar o conteúdo */
-    color: white;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+/* Estilo para o contêiner principal */
+.container {
+    width: 100%;
+    height: 120vh;
+    background: url('./images/background.gif') no-repeat fixed center; /* GIF de fundo */
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Contêiner principal */
-.container {
-    width: 90%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.1); /* Fundo semitransparente */
-    border-radius: 15px;
+/* Estilo para o conteúdo do contêiner */
+.containerContents {
+    background: url('./images/a016.jpg') no-repeat fixed center;
+    width: 300px;
     padding: 20px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Título */
-.title h2 {
-    margin: 0;
-    font-size: 28px;
-    color: #f1c40f; /* Destaque no título */
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-/* Área de resultados */
-#results {
-    margin: 15px 0;
+/* Estilo para o título */
+.title {
     padding: 10px;
-    background: #34495e; /* Cor de fundo dos resultados */
-    color: white;
-    border-radius: 8px;
-    font-size: 18px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    color: #f5f5f5;
+    text-align: center;
 }
 
-/* Feedback visual nos resultados */
-#results.won {
-    background: #27ae60; /* Verde para vitória */
-}
-
-#results.lost {
-    background: #c0392b; /* Vermelho para derrota */
-}
-
-#results.processing {
-    background: #2980b9; /* Azul para processamento */
-}
-
-/* Área dos slots */
+/* Estilo para a área das imagens dos slots */
 .images {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 10px;
     margin: 20px 0;
-}
-
-/* Estilo dos slots */
-.slot-container {
-    width: 90px;
-    height: 90px;
-    background: black;
-    border: 3px solid #f1c40f;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease; /* Transição ao rodar */
-}
-
-/* Imagens dos slots */
-.slot-container img {
     width: 100%;
-    height: 100%;
+}
+
+/* Estilo para os slots */
+.slots {
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    animation: spin 1.5s ease-in-out infinite; /* Animação ao rodar */
 }
 
-/* Animação dos slots */
-@keyframes spin {
-    0% {
-        transform: translateY(-200%);
-    }
-    100% {
-        transform: translateY(0);
-    }
+/* Estilo para os botões */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background: pink;
+    outline: none;
+    color: blue;
+    border: solid 1px blue;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* Área de controle */
-.controls {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+/* Estilo para os botões ao passar o mouse */
+button:hover {
+    color: greenyellow;
+    border: solid 1px greenyellow;
+    background-color: blue;
 }
 
-/* Elementos de controle */
-.controls div {
-    background: rgba(255, 255, 255, 0.2);
+/* Estilo para a área de resultados */
+#results {
+    margin: 10px;
     padding: 10px;
-    border-radius: 8px;
+    color: #fff;
+    background: #7f8c8d;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Estilo para a área de resultados quando o jogador ganha */
+#results.won {
+    background: #27ae60;
+}
+
+/* Estilo para a área de resultados quando o jogador perde */
+#results.lost {
+    background: #c0392b;
+}
+
+/* Estilo para as áreas de créditos, aposta e ganhos */
+.credits, .bet, .winnings {
+    margin: 10px 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
 }
 
-.controls div label {
-    font-size: 14px;
-    color: #f1c40f;
-}
-
-.controls div input {
+/* Estilo para os inputs de créditos, aposta e ganhos */
+.credits input, .bet input, .winnings input {
     width: 50%;
-    background: black;
-    color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
     padding: 5px;
     text-align: right;
-    font-size: 14px;
 }
 
-/* Botões */
-button {
-    width: 100%;
-    max-width: 200px;
-    padding: 10px 15px;
-    margin: 10px 0;
-    background: #f1c40f;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    background: #d4ac0d; /* Cor mais escura ao passar o mouse */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05); /* Leve aumento no tamanho */
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    position: relative;
-}
-
-.modal-content img {
-    max-width: 100%;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 18px;
-    color: black;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.close:hover {
-    color: red;
-}
-
-/* Estilo responsivo */
-@media screen and (max-width: 768px) {
-    .container {
+/* Estilo para telas menores que 768px */
+@media screen and (max-width: 767.98px) {
+    .containerContents {
         width: 100%;
-        padding: 15px;
+        display: flex;
     }
+    .slots {
+        width: 100px;
+        height: 100px;
+    }
+}
 
-    .slot-container {
+/* Estilo para telas entre 768px e 1024px */
+@media screen and (min-width: 768px) {
+    .containerContents {
+        width: 500px;
+    }
+    .slots {
         width: 70px;
         height: 70px;
     }
+}
 
-    button {
-        font-size: 14px;
-    }
-
-    #results {
-        font-size: 14px;
+/* Estilo para telas maiores que 1024px */
+@media screen and (min-width: 1024px) {
+    .slots {
+        width: 80px;
+        height: 80px;
     }
 }
