@@ -10,7 +10,7 @@ function multiplicador() {
         "./images/Mario Bros 001.jpg", "./images/Scooby Doo 001.jpg"
     ];
     var pesos = [1, 1, 1, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.10, 0.10, 0.10, 0.05, 0.05, 0.05, 0.03, 0.03, 0.02];
-    var multiplicadores = [0.5, 0.5, 0.5, 1.0, 1.0, 1.0, 1.5, 1.5, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var multiplicadores = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     var resultados = [];
 
     var divImagens = document.querySelector(".images");
