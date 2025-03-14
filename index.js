@@ -118,3 +118,35 @@ function calcularResultado(resultados, aposta, creditos, divResultado) {
         exibirMensagem(divResultado, "Você perdeu. Tente novamente!", "lost");
     }
 }
+
+// Função para salvar configurações do administrador
+function salvarConfiguracoes() {
+    const adminUser = document.getElementById("adminUser").value;
+    const adminSenha = document.getElementById("adminSenha").value;
+    const adminEmail = document.getElementById("adminEmail").value;
+
+    if (!adminUser || !adminSenha || !adminEmail) {
+        alert("Preencha todos os campos antes de salvar.");
+        return;
+    }
+
+    configuracoes.adminEmail = adminEmail;
+    alert("Configurações salvas com sucesso!");
+    fecharMenuConfiguracoes();
+}
+
+// Função para abrir o menu de configurações
+function abrirMenuConfiguracoes() {
+    const menu = document.getElementById("configuracoes");
+    menu.style.display = "block";
+
+    document.getElementById("adminUser").value = configuracoes.adminUser || "admin";
+    document.getElementById("adminSenha").value = configuracoes.adminSenha || "1234";
+    document.getElementById("adminEmail").value = configuracoes.adminEmail || "admin@exemplo.com";
+}
+
+// Função para fechar o menu de configurações
+function fecharMenuConfiguracoes() {
+    const menu = document.getElementById("configuracoes");
+    menu.style.display = "none";
+}
