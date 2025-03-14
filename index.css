@@ -160,3 +160,18 @@ button:hover {
         height: 80px;
     }
 }
+
+/* Animação de rotação dos slots */
+@keyframes spin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1000px); } /* Ajuste o valor para controlar a velocidade */
+}
+
+.slots.rodando {
+    animation: spin 0.5s linear infinite; /* Duração da rotação */
+}
+
+/* Classe para parar a animação */
+.slots.parado {
+    animation: none;
+}
