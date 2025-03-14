@@ -4,13 +4,14 @@ html, body {
     padding: 0;
     height: 100%;
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    background-color: #000;
 }
 
 /* Estilo para o contêiner principal */
 .container {
     width: 100%;
     height: 120vh;
-    background: url('./images/a006.jpg') no-repeat fixed center; /* GIF de fundo */
+    background: url('./images/background.gif') no-repeat fixed center; /* GIF de fundo */
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -19,7 +20,7 @@ html, body {
 
 /* Estilo para o conteúdo do contêiner */
 .containerContents {
-    background: url('./images/a013.jpg') no-repeat fixed center;
+    background: url('./images/a016.jpg') no-repeat fixed center;
     width: 300px;
     padding: 20px;
     border-radius: 10px;
@@ -92,8 +93,13 @@ button:hover {
     background: #c0392b;
 }
 
+/* Estilo para quando está processando */
+#results.processing {
+    background: #3498db;
+}
+
 /* Estilo para as áreas de créditos, aposta e ganhos */
-.credits, .bet, .winnings {
+.credits, .bet, .winnings, .plays {
     margin: 10px 0;
     display: flex;
     justify-content: space-between;
@@ -101,50 +107,98 @@ button:hover {
 }
 
 /* Estilo para os inputs de créditos, aposta e ganhos */
-.credits input, .bet input, .winnings input {
+.credits input, .bet input, .winnings input, .plays input {
     width: 50%;
     padding: 5px;
     text-align: right;
 }
 
-/* Estilo para telas menores que 768px */
+/* Estilo do QR Code */
+.qr-code-container {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.qr-code-container.show {
+    display: block;
+}
+
+/* Estilo para o menu de configurações */
+.configuracoes {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.configuracoes h3 {
+    margin-bottom: 20px;
+}
+
+/* Inputs e botões no menu de configurações */
+.configuracoes input {
+    width: 100%;
+    margin: 5px 0 15px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.configuracoes button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.configuracoes button:hover {
+    background: #0056b3;
+}
+
+/* Estilo responsivo para telas menores que 768px */
 @media screen and (max-width: 767.98px) {
     .containerContents {
         width: 100%;
-        display: flex;
     }
-    .slots {
-        width: 100px;
-        height: 100px;
-    }
-}
 
-/* Estilo para telas entre 768px e 1024px */
-@media screen and (min-width: 768px) {
-    .containerContents {
-        width: 500px;
-    }
-    .slots {
-        width: 70px;
-        height: 70px;
-    }
-}
-
-/* Estilo para telas maiores que 1024px */
-@media screen and (min-width: 1024px) {
     .slots {
         width: 80px;
         height: 80px;
     }
 }
 
-/* Estilo para o QR Code */
-.qr-code-container {
-    display: none;
-    text-align: center;
-    margin-top: 20px;
+/* Estilo para telas entre 768px e 1024px */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .containerContents {
+        width: 500px;
+    }
+
+    .slots {
+        width: 90px;
+        height: 90px;
+    }
 }
 
-.qr-code-container.show {
-    display: block;
+/* Estilo para telas maiores que 1024px */
+@media screen and (min-width: 1024px) {
+    .slots {
+        width: 100px;
+        height: 100px;
+    }
 }
