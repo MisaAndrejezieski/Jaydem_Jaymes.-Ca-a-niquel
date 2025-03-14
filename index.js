@@ -4,10 +4,13 @@ function multiplicador() {
         "./images/a001.jpg", "./images/a002.jpg", "./images/a003.jpg",
         "./images/a004.jpg", "./images/a005.jpg", "./images/a006.jpg",
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
-        "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg"
+        "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg",
+        "./images/Chapolin 001.jpg", ".images/Chapolin tripa seca 001.jpg", 
+        "./images/Chaves 001.jpg", "./images/Desafios e Limitações da Realidade Aumentada.jpg", 
+        "./images/Mario Bros 001.jpg", "./images/Scooby Doo 001.jpg"
     ];
-    var pesos = [0.08, 0.08, 0.05, 0.5, 0.05, 0.05, 0.05, 0.04, 0.04, 0.03, 0.02, 0.01];
-    var multiplicadores = [2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
+    var pesos = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.04, 0.04, 0.04, 0.04, 0.02, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+    var multiplicadores = [1.5,1.5,1.5,1.5,1.5,1.5,2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9, 10];
     var resultados = [];
 
     var divImagens = document.querySelector(".images");
@@ -50,13 +53,13 @@ function multiplicador() {
         });
     }, 100); // Muda as imagens a cada 100ms
 
-    // Para a rotação após 2 segundos e verifica o resultado
+    // Para a rotação após 1.5 segundos e verifica o resultado
     setTimeout(function () {
         clearInterval(intervaloRodando); // Para de mudar as imagens
         slots.forEach(slot => slot.classList.remove("rodando"));
         definirResultados();
         verifiqueSeGanhou();
-    }, 2000); // 2 segundos de rotação
+    }, 1500); // 1.5 segundos de rotação
 
     // Função para definir os resultados finais dos slots
     function definirResultados() {
