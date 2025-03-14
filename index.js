@@ -56,13 +56,13 @@ function multiplicador() {
         });
     }, 100); // Muda as imagens a cada 100ms
 
-    // Para a rotação após 1.5 segundos e verifica o resultado
+    // Para a rotação após 2 segundos e verifica o resultado
     setTimeout(function () {
         clearInterval(intervaloRodando); // Para de mudar as imagens
         slots.forEach(slot => slot.classList.remove("rodando"));
         definirResultados();
         verifiqueSeGanhou();
-    }, 1500); // 1.5 segundos de rotação
+    }, 2000); // 2 segundos de rotação
 
     // Função para definir os resultados finais dos slots
     function definirResultados() {
