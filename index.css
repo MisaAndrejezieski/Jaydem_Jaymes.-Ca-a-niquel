@@ -16,7 +16,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./images/background.gif') no-repeat center center fixed; /* GIF de fundo */
+    background: url('./images/a006.jpg') no-repeat center center fixed; /* GIF de fundo */
     background-size: cover;
     padding: 20px;
     box-sizing: border-box;
