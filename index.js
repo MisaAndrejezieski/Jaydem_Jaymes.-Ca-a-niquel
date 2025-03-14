@@ -150,7 +150,7 @@ function multiplicador() {
             });
         } else {
             ganhos.value = 0;
-            divResultado.innerHTML = "LOST!! (' O ')";
+            divResultado.innerHTML = "(' O ')";
             divResultado.classList = 'lost';
         }
 
