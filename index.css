@@ -99,6 +99,16 @@ html, body {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
 }
 
+/* Animação de rotação dos slots */
+@keyframes spin {
+    0% { transform: rotateX(0deg); }
+    100% { transform: rotateX(360deg); }
+}
+
+.slots.rodando {
+    animation: spin 0.5s linear infinite;
+}
+
 /* Efeito de hover nos slots */
 .slots:hover {
     transform: scale(1.1); /* Aumenta o tamanho do slot */
