@@ -39,15 +39,19 @@ function multiplicador() {
     divResultado.classList = "";
     divResultado.innerHTML = "Rodando...";
 
-    // Simula a rotação dos slots
-    var rodando = setInterval(rodar, 100);
-    setTimeout(function () {
-        clearInterval(rodando);
-        verifiqueSeGanhou();
-    }, 500);
+    // Inicia a rotação dos slots
+    var slots = document.querySelectorAll(".slots");
+    slots.forEach(slot => slot.classList.add("rodando"));
 
-    // Função para rodar os slots
-    function rodar() {
+    // Para a rotação após 2 segundos e verifica o resultado
+    setTimeout(function () {
+        slots.forEach(slot => slot.classList.remove("rodando"));
+        definirResultados();
+        verifiqueSeGanhou();
+    }, 2000); // 2 segundos de rotação
+
+    // Função para definir os resultados finais dos slots
+    function definirResultados() {
         for (var i = 0; i < quantidadeDeSlot; i++) {
             var aleatorio = selecionarImagemComPeso();
             var slotName = '.slot-' + (i + 1);
