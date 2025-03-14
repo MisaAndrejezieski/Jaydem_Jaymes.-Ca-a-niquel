@@ -1,11 +1,11 @@
 function multiplicador() {
     const quantidadeDeSlot = 9;
     var imagens = [
-        "./images/Chapolin 002.jpg", "./images/a002.jpg", "./images/a003.jpg",
+        "./images/Chapolin 002.jpg", "./images/Chapolin 001.jpg", "./images/a003.jpg",
         "./images/Chaves 001.jpg", "./images/a005.jpg", "./images/a006.jpg",
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
         "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg",
-        "./images/Chapolin 001.jpg", "./images/a001.jpg", 
+        "./images/a002.jpg", "./images/a001.jpg", 
         "./images/a004.jpg", "./images/Desafios e Limitações da Realidade Aumentada.jpg", 
         "./images/Mario Bros 001.jpg", "./images/Scooby Doo 001.jpg"
     ];
