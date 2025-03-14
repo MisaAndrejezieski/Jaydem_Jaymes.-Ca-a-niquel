@@ -42,8 +42,17 @@ function multiplicador() {
     var slots = document.querySelectorAll(".slots");
     slots.forEach(slot => slot.classList.add("rodando"));
 
+    // Intervalo para mudar as imagens durante a rotação
+    var intervaloRodando = setInterval(function () {
+        slots.forEach(slot => {
+            var aleatorio = selecionarImagemComPeso();
+            slot.src = imagens[aleatorio];
+        });
+    }, 100); // Muda as imagens a cada 100ms
+
     // Para a rotação após 2 segundos e verifica o resultado
     setTimeout(function () {
+        clearInterval(intervaloRodando); // Para de mudar as imagens
         slots.forEach(slot => slot.classList.remove("rodando"));
         definirResultados();
         verifiqueSeGanhou();
