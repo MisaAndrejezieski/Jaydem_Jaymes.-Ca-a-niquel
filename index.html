@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Caça-níquel</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Pick Pock - Caça-níquel</title>
 </head>
 <body>
     <div class="container">
@@ -56,12 +56,15 @@
 
             <!-- Botão para comprar créditos com PIX -->
             <button type="button" id="comprarCreditosPix" onclick="iniciarPagamentoPix();">Comprar Créditos com PIX</button>
+
+            <!-- Container para QR Code -->
+            <div id="qrCodeContainer" class="qr-code-container"></div>
         </div>
     </div>
 
     <!-- SDK do Mercado Pago -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <!-- Script do jogo -->
-    <script src="index.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
