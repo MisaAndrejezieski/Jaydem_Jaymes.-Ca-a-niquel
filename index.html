@@ -59,7 +59,23 @@
 
             <!-- Container para QR Code -->
             <div id="qrCodeContainer" class="qr-code-container"></div>
+
+            <!-- Link para o menu de configurações -->
+            <button type="button" onclick="abrirMenuConfiguracoes()">Configurações</button>
         </div>
+    </div>
+
+    <!-- Menu de configurações (pop-up escondido por padrão) -->
+    <div id="configuracoes" class="configuracoes">
+        <h3>Menu de Configurações (Administrador)</h3>
+        <label for="adminUser">Usuário Admin:</label>
+        <input type="text" id="adminUser">
+        <label for="adminSenha">Senha Admin:</label>
+        <input type="password" id="adminSenha">
+        <label for="qrCodeUrl">URL do QR Code:</label>
+        <input type="text" id="qrCodeUrl">
+        <button onclick="salvarConfiguracoes()">Salvar</button>
+        <button onclick="fecharMenuConfiguracoes()">Fechar</button>
     </div>
 
     <!-- SDK do Mercado Pago -->
