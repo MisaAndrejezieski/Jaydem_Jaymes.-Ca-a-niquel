@@ -5,7 +5,7 @@ function multiplicador() {
         "./images/a004.jpg", "./images/a005.jpg", "./images/a006.jpg",
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
         "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg",
-        "./images/Chapolin 001.jpg", ".images/Chapolin tripa seca 001.jpg", 
+        "./images/Chapolin 001.jpg", ".images/Chapolin 002.jpg", 
         "./images/Chaves 001.jpg", "./images/Desafios e Limitações da Realidade Aumentada.jpg", 
         "./images/Mario Bros 001.jpg", "./images/Scooby Doo 001.jpg"
     ];
