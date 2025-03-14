@@ -1,49 +1,89 @@
-/* Define o estilo básico para o HTML e o corpo da página */
+/* Reset básico */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #333); /* Fundo gradiente escuro */
+    color: #fff;
+    overflow: hidden;
 }
 
-/* Estilo para o contêiner principal */
+/* Contêiner principal */
 .container {
     width: 100%;
-    height: 120vh;
-    background: url('./images/background.gif') no-repeat fixed center; /* GIF de fundo */
-    background-size: cover;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url('./images/background.gif') no-repeat center center fixed; /* GIF de fundo */
+    background-size: cover;
 }
 
-/* Estilo para o conteúdo do contêiner */
+/* Conteúdo do contêiner */
 .containerContents {
-    background: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
-    backdrop-filter: blur(5px); /* Efeito de desfoque */
-    width: 300px;
+    background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    backdrop-filter: blur(10px); /* Efeito de desfoque */
+    width: 90%;
+    max-width: 500px;
     padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-}
-
-/* Estilo para o título */
-.title {
-    padding: 10px;
-    color: #f5f5f5;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
-/* Estilo para a área das imagens dos slots */
+/* Título do jogo */
+.title h2 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #ffcc00; /* Amarelo vibrante */
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00; /* Efeito de brilho */
+}
+
+/* Área de resultados */
+#results {
+    margin: 20px 0;
+    padding: 15px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    transition: background 0.3s ease;
+}
+
+#results.won {
+    background: #27ae60; /* Verde para vitória */
+    animation: pulse 0.5s ease;
+}
+
+#results.lost {
+    background: #c0392b; /* Vermelho para derrota */
+    animation: shake 0.5s ease;
+}
+
+/* Animação de pulso para vitória */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Animação de tremor para derrota */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Área das imagens dos slots */
 .images {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin: 20px 0;
-    width: 100%;
 }
 
 /* Estilo para os slots */
@@ -51,7 +91,14 @@ html, body {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    border: 2px solid #ffcc00;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slots:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ffcc00;
 }
 
 /* Animação de rotação dos slots */
@@ -64,114 +111,86 @@ html, body {
     animation: spin 0.5s linear infinite;
 }
 
-/* Estilo para os botões */
-button {
-    margin: 10px;
-    padding: 10px 20px;
-    background: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-/* Estilo para os botões ao passar o mouse */
-button:hover {
-    background: #2980b9;
-}
-
-/* Estilo para a área de resultados */
-#results {
-    margin: 10px;
-    padding: 10px;
-    color: #fff;
-    background: #7f8c8d;
-    border-radius: 5px;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-/* Estilo para a área de resultados quando o jogador ganha */
-#results.won {
-    background: #27ae60;
-}
-
-/* Estilo para a área de resultados quando o jogador perde */
-#results.lost {
-    background: #c0392b;
-}
-
-/* Estilo para as áreas de créditos, aposta e ganhos */
+/* Área de controle (créditos, aposta, ganhos, jogadas) */
 .controls {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    margin: 20px 0;
 }
 
-.credits, .bet, .winnings {
+.credits, .bet, .winnings, .plays {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.credits label, .bet label, .winnings label {
+.credits label, .bet label, .winnings label, .plays label {
     font-weight: bold;
-    color: #fff;
+    color: #ffcc00;
 }
 
-.credits input, .bet input, .winnings input {
+.credits input, .bet input, .winnings input, .plays input {
     width: 60%;
     padding: 5px;
     text-align: right;
-    background: #34495e;
-    color: #fff;
+    background: transparent;
     border: none;
-    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
 }
 
-/* Estilo para telas menores que 768px */
+/* Botão de jogar */
+button {
+    margin: 20px 0;
+    padding: 15px 30px;
+    background: #ffcc00;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background: #ffdd33;
+    transform: translateY(-5px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsividade */
 @media screen and (max-width: 767.98px) {
     .containerContents {
         width: 100%;
+        padding: 10px;
     }
+
     .slots {
         width: 80px;
         height: 80px;
     }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
 }
 
-/* Estilo para telas entre 768px e 1024px */
 @media screen and (min-width: 768px) {
     .containerContents {
         width: 500px;
     }
+
     .slots {
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
     }
-}
-
-/* Estilo para telas maiores que 1024px */
-@media screen and (min-width: 1024px) {
-    .slots {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-/* Animação de rotação dos slots */
-@keyframes spin {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-1000px); } /* Ajuste o valor para controlar a velocidade */
-}
-
-.slots.rodando {
-    animation: spin 0.5s linear infinite; /* Duração da rotação */
-}
-
-/* Classe para parar a animação */
-.slots.parado {
-    animation: none;
 }
