@@ -1,7 +1,7 @@
 function multiplicador() {
     const quantidadeDeSlot = 9;
     var imagens = [
-        "./images/toy story.jfif", "./images/a002.jpg", "./images/a003.jpg",
+        "./images/Enf_001.png", "./images/a002.jpg", "./images/a003.jpg",
         "./images/a004.jpg", "./images/a005.jpg", "./images/a006.jpg",
         "./images/a007.jpg", "./images/a008.jpg", "./images/a009.jpg",
         "./images/a010.jpg", "./images/a011.jpg", "./images/a012.jpg",
