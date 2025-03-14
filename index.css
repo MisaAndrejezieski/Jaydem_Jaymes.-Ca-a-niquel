@@ -1,231 +1,43 @@
-/* Define o estilo básico para o HTML e o corpo da página */
+/* Estilo básico */
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Estilo para o contêiner principal */
+/* Estilos principais */
 .container {
-    width: 100%;
     max-width: 600px;
-    height: auto;
-    background: url('./images/background.gif') no-repeat center center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-/* Estilo para o conteúdo do jogo */
-.containerContents {
     background: rgba(255, 255, 255, 0.9);
-    width: 100%;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    gap: 20px;
-}
-
-/* Estilo para o título */
-.title h2 {
-    color: #333;
-    font-size: 24px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     text-align: center;
-    margin: 0;
 }
 
-/* Estilo para a área das imagens dos slots */
-.images {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 0 auto;
-}
-
-/* Estilo para os slots */
-.slots {
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
-    border: 2px solid #ccc;
-    object-fit: cover;
-    background-color: #fff;
-}
-
-/* Estilo para os botões */
-button {
-    padding: 10px 15px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s ease;
-    width: 100%;
-    max-width: 200px;
-}
-
-button:hover {
-    background: #0056b3;
-}
-
-/* Estilo para a área de resultados */
-#results {
-    font-size: 16px;
-    color: #fff;
-    background: #7f8c8d;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    min-height: 40px;
-    width: 100%;
-    max-width: 500px;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Estilo para a área de resultados ao vencer */
-#results.won {
-    background: #27ae60;
-}
-
-/* Estilo para a área de resultados ao perder */
-#results.lost {
-    background: #c0392b;
-}
-
-/* Estilo ao processar */
-#results.processing {
-    background: #3498db;
-}
-
-/* Estilo para os controles (créditos, aposta, ganhos, jogadas) */
-.controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-}
-
-.controls div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.controls div label {
-    font-size: 14px;
-    color: #333;
-}
-
-.controls div input {
-    width: 50%;
-    padding: 5px;
-    font-size: 14px;
-    text-align: right;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-/* Estilo do QR Code */
-.qr-code-container {
-    display: none;
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.qr-code-container.show {
-    display: block;
-}
-
-/* Estilo para o menu de configurações */
-.configuracoes {
+/* Modal */
+.modal {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
+    text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    width: 90%;
-    max-width: 400px;
 }
 
-.configuracoes h3 {
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: #333;
-}
-
-/* Inputs e botões no menu de configurações */
-.configuracoes input {
-    width: 100%;
-    margin: 5px 0 15px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.configuracoes button {
-    margin: 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #007bff;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.configuracoes button:hover {
-    background: #0056b3;
-}
-
-/* Responsividade para dispositivos menores */
-@media screen and (max-width: 768px) {
-    .containerContents {
-        width: 90%;
-    }
-
-    .slots {
-        width: 70px;
-        height: 70px;
-    }
-
-    button {
-        font-size: 12px;
-    }
-
-    #results {
-        font-size: 14px;
-    }
-}
